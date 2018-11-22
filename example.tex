@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[LFE,LAE,T2A,T1]{fontenc}
+\usepackage[english,arabic,greek,russian,polish]{babel}
+\usepackage{arabtex} % Required for arab
+\usepackage{CJKutf8} % Required for Chinese, Japanese and Korean
+\newcommand{\textcn}[1]{\begin{CJK}{UTF8}{gbsn}#1\end{CJK}}
+\newcommand{\textjp}[1]{\begin{CJK}{UTF8}{min}#1\end{CJK}}
+\newcommand{\textko}[1]{\begin{CJK}{UTF8}{mj}#1\end{CJK}}
+
+\title{\LaTeX~Unicode Template}
+\author{Mauricio Matamoros}
+
+\begin{document}
+\selectlanguage{english}% Set English as default
+\maketitle
+
+\begin{abstract}
+Writing simultaneously in several languages in \LaTeX{} can produce headaches.
+Nonetheless, when updated and properly set, it becomes pretty straightforward.
+The present document explains how to write in (at least) 13 different languages other than English by adding less than 10 lines of code.
+Of course, compatibility with all packages is not guaranteed.
+\end{abstract}
+
+\section{Example}
+\begin{center}
+\begin{tabular}{c c}
+Arabic     & \foreignlanguage{arabic}{هذا عربي} \\
+Chinese    & \textcn{这是汉语} \\
+French     & C'est français \\
+German     & Einige große Wörter auf Deutsch \\
+Greek      & \foreignlanguage{greek}{αυτό είναι ελληνικό} \\
+Japanese   & \textjp{これは日本語です} \\
+Korean     & \textko{이것은 한국이다.} \\
+Norwegian  & Norsk er søtt \\
+Polish     & Niektóre słowa po polsku \\
+Portuguese & Português não é espanhol \\
+Russian    & \foreignlanguage{russian}{Это русский} \\
+Spanish    & Esto es español \\
+Swedish    & Några ord på svenska \\
+\end{tabular}
+\end{center}
+
+\section{Making it work}
+Import the following packages right after defining the document class
+
+\subsection{Snippet}
+\begin{verbatim}
+\usepackage[utf8]{inputenc}
+\usepackage[LFE,LAE,T2A,T1]{fontenc}
+\usepackage[english,arabic,greek,russian,polish]{babel}
+\usepackage{arabtex} % Required for arab
+\usepackage{CJKutf8} % Required for Chinese, Japanese and Korean
+\end{verbatim}
+
+Just copy-pasting these five lines will do most of the work.
+
+\subsection{Packages in detail}
+\begin{enumerate}
+	\item \textbf{Input encoding set to utf8:} The source must be encoded using the utf-8 character set, and so it should be told to \LaTeX.
+
+	\item \textbf{Set the proper font encoding:} To produce the correct output, all unicode pages in Computer Modern must be enabled.
+	We do so by adding the following options to \texttt{fontenc}.
+	\begin{itemize}
+		\item[\texttt{T1}] The extended Latin set is accessible by enabling \texttt{T1}. This will give us access to virtually all western-European languages like French, German, Italian, Norwegian, Spanish, Swedish, Portuguese, 
+		\item[\texttt{T2A}] This little guy gives us access to the Cyrillic pages of the font. Useful for Russian (at least).
+		\item[\texttt{LFE,LAE}] These two fellas allow us to write in Arab.
+	\end{itemize}
+
+	\item \textbf{Add babel with required languages:} Arabic, Greek, Russian, and Polish need to be defined in Babel for this example to work.
+	Here it is important to remark that the \texttt{\textbackslash{}foreignlanguage} macro is necessary for writing in Arabic and Greek, but not in Cyrillic.
+	However, Greek and Russian are mutually exclusive without Babel, so using them together makes necessary to wrap both inputs with the aforementioned macro. 
+\end{enumerate}
+
+\end{document} 
